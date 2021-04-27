@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from .models import Post
+from .models import Post, Comment
 from django.urls import reverse_lazy
+from django.forms import ModelForm
 
 # Create your views here.
 class BlogListView(ListView):
@@ -28,3 +29,12 @@ class BlogDeleteView(DeleteView):
     model = Post
     template_name = 'post_delete.html'
     success_url = reverse_lazy('home')
+    
+    
+    
+# Create comment views here.
+class CommentForm(ModelForm):
+    
+    class Meta:
+        model = Comment
+        fields = ('name', 'comment_text',)

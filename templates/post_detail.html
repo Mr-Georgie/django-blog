@@ -3,7 +3,7 @@
 {% block content %}
     <div class='post-entry pt-3'>
         <h2>{{ post.title }}</h2>
-        <p>{{ post.body }}</p>
+        <p class='pt-2 pb-3'>{{ post.body }}</p>
 
         {% if user.is_authenticated %}
 
@@ -17,6 +17,7 @@
 
 
         <hr>
+        <h5 class='pb-3'>Comments:</h5>
         {% for comment in post.comments.all %}
             <div class="comment">
                 <p>{{ comment.comment_text|linebreaks }}</p>

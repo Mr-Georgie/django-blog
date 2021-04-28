@@ -4,6 +4,9 @@
     <div class='post-entry pt-3'>
         <h2>{{ post.title }}</h2>
         <p class='pt-2 pb-3'>{{ post.body }}</p>
+        <p class=" text-muted">Written by: 
+            <span class='text-uppercase'>{{ post.author }}</span>
+        </p>
 
         {% if user.is_authenticated %}
             {% if user.id == post.author.id %}
@@ -21,12 +24,17 @@
         <h5 class='pb-3'>Comments:</h5>
         {% for comment in post.comments.all %}
             <div class="comment">
+                <strong>{{ comment.name }} says:</strong> 
                 <p>{{ comment.comment_text|linebreaks }}</p>
-                <strong> by {{ comment.name }}</strong>
+                
             </div>
         {% empty %}
             <p>No comments here yet :(</p>
         {% endfor %}
+
+        <hr>
+        <a class="btn btn-link" href="{% url 'home' %}">Go back</a>
+
     </div>
     
 {% endblock %}

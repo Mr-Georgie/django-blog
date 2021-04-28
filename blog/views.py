@@ -7,7 +7,7 @@ from .forms import CommentForm, NewUserForm
 from django.urls import reverse_lazy
 
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import login
+from django.contrib.auth import login, views
 from django.contrib import messages #import messages
 
 from django.contrib.auth.forms import UserCreationForm
@@ -42,6 +42,11 @@ class UserRegisterView(CreateView):
     template_name = 'registration/register.html'
     success_url = reverse_lazy('login')
     
+    
+# class PasswordChangeView(UpdateView):
+#     form_class = views.PasswordChangeView
+#     template_name = 'registration/change_password.html'
+#     success_url = reverse_lazy('login')
     
         
 def add_comment_to_post(request, pk):

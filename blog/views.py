@@ -2,10 +2,15 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from .models import Post, Comment
+from .forms import CommentForm, NewUserForm
+
 from django.urls import reverse_lazy
-from django.forms import ModelForm
 
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import login
+from django.contrib import messages #import messages
+
+from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 class BlogListView(ListView):
@@ -32,14 +37,12 @@ class BlogDeleteView(DeleteView):
     template_name = 'post_delete.html'
     success_url = reverse_lazy('home')
     
+class UserRegisterView(CreateView):
+    form_class = UserCreationForm
+    template_name = 'registration/register.html'
+    success_url = reverse_lazy('login')
     
     
-# Create comment views here.
-class CommentForm(ModelForm):
-    
-    class Meta:
-        model = Comment
-        fields = ('name', 'comment_text',)
         
 def add_comment_to_post(request, pk):
     post = get_object_or_404(Post, pk=pk)

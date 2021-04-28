@@ -9,8 +9,11 @@
             <a href="{% url 'post_delete' post.pk %}" class="btn btn-danger">Delete</a>
         </div>
 
+        {% if user.is_authenticated %}
         <a class="btn btn-secondary" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
-        
+        {% endif %}
+
+
         <hr>
         {% for comment in post.comments.all %}
             <div class="comment">

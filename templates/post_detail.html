@@ -6,13 +6,14 @@
         <p class='pt-2 pb-3'>{{ post.body }}</p>
 
         {% if user.is_authenticated %}
-
-        <div class='button pt-3 pb-3'>
-            <a href="{% url 'post_edit' post.pk %}" class="btn btn-primary">Edit</a>
-            <a href="{% url 'post_delete' post.pk %}" class="btn btn-danger">Delete</a>
-        </div>
+            {% if user.id == post.author.id %}
+            <div class='button pt-3 pb-3'>
+                <a href="{% url 'post_edit' post.pk %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'post_delete' post.pk %}" class="btn btn-danger">Delete</a>
+            </div>
+            {% endif %}
         
-        <a class="btn btn-secondary" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
+            <a class="btn btn-secondary" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
         {% endif %}
 
 

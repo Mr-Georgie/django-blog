@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class='post-entry pt-3'>
+        <h2>{{ post.title }}</h2>
+        <p class='pt-2 pb-3'>{{ post.body }}</p>
+        <p class=" text-muted">Written by: 
+            <span class='text-uppercase'>{{ post.author }}</span>
+        </p>
+
+        {% if user.is_authenticated %}
+            {% if user.id == post.author.id %}
+            <div class='button pt-3 pb-3'>
+                <a href="{% url 'post_edit' post.pk %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'post_delete' post.pk %}" class="btn btn-danger">Delete</a>
+            </div>
+            {% endif %}
+        
+            <a class="btn btn-secondary" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
+        {% endif %}
+
+
+        <hr>
+        <h5 class='pb-3'>Comments:</h5>
+        {% for comment in post.comments.all %}
+            <div class="comment">
+                <strong>{{ comment.name }} says:</strong> 
+                <p>{{ comment.comment_text|linebreaks }}</p>
+                
+            </div>
+        {% empty %}
+            <p>No comments here yet :(</p>
+        {% endfor %}
+
+        <hr>
+        <a class="btn btn-link" href="{% url 'home' %}">Go back</a>
+
+    </div>
+    
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}        
+
+<!--Register--> 
+<div class="container py-5">
+	<h1>Edit Your Profile</h1>
+	<h6 class="pt-4 pb-1">Find the link to change password at the bottom of this form</h6>
+	<form method="POST">
+		{% csrf_token %}
+		{{ form.as_p }}                    
+		<button class="btn btn-primary" type="submit">Update</button>
+	</form>
+</div>
+
+{% endblock %}
